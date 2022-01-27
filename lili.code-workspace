@@ -7,6 +7,9 @@
 	"settings": {
 		"files.watcherExclude": {
 			"**/target": true
-		}
+		},
+		"cSpell.words": [
+			"orgx"
+		]
 	}
 }
