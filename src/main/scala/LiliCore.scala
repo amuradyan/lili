@@ -1,24 +1,43 @@
 package lili_core
 
-case class Contributor(id: Long, login: String, contributions: Int)
+class Contributor(val id: Long, val login: String, val contributions: Int):
+   override def equals(other: Any): Boolean = other match {
+      case that: Contributor => id == that.id && login == that.login
+      case _                 => false
+   }
+
 type Contributors = List[Contributor]
 
-case class Repository(id: Long, name: String, contributors: Contributors)
+case class Repository(id: Long, owner: String, name: String):
+   def fullName: String = owner + "/" + name
+
 type Repositories = List[Repository]
 
-case class Organization(id: Long, name: String, repositories: Repositories)
-type Organizations = List[Organization]
-
 trait VCSHub:
-  def listOrganizationRepositories(organization: String): Repositories
-  def listRepositoryContributors(organization: String, repository: String): Contributors
+   type Contributors = List[Contributor]
+   type Repositories = List[Repository]
+
+   def listOrganizationRepositories(organization: String): Repositories
+   def listRepositoryContributors(organization: String, repository: String): Contributors
 
 object LiliCore:
-  type Contributors = List[Contributor]
-  type Repositories = List[String]
+   def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =
+      hub.listOrganizationRepositories(organization)
 
-  def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Unit = ???
+   def getRepositoryContributors(organization: String, repository: String)(implicit hub: VCSHub): Contributors =
+      hub.listRepositoryContributors(organization, repository)
 
-  def getRepositoryContributors(repository: String)(implicit hub: VCSHub): Contributors = ???
+   def getOrganizationContributors(organization: String)(implicit hub: VCSHub): Contributors =
+      getOrganizationRepositories(organization)
+         .flatMap { repository =>
+            getRepositoryContributors(organization, repository.name)
+         }
+         .groupBy(_.login)
+         .mapValues {
+            _.reduce((l, r) => Contributor(l.id, l.login, l.contributions + r.contributions))
+         }
+         .values
+         .toList
 
-  def getOrganizationContributors(organization: String)(implicit hub: VCSHub): Contributors = ???
+   def getContributorsSortedByContributions(organization: String)(implicit hub: VCSHub): Contributors =
+      getOrganizationContributors(organization).sortBy(_.contributions)
