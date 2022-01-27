@@ -5,10 +5,10 @@ import flatspec._
 import matchers._
 import org.scalatest.matchers.should.Matchers
 import lili_core.LiliCore
-import lili_core.VCSHub
+import lili_core.hub.VCSHub
 
 class LiliCoreTest extends AnyFlatSpec with Matchers:
-   implicit val busyOrgHub: VCSHub = VCSHubs.busyOrgsHub
+   implicit val busyOrgHub: VCSHub = new DummyHub
 
    "Listing repos of an empty organization" should "result in an empty list" in {
       val repos = LiliCore.getOrganizationRepositories("OrgZ")
@@ -73,8 +73,15 @@ class LiliCoreTest extends AnyFlatSpec with Matchers:
    }
 
    "Organization contributor list" should "sum up each contributors contributions" in {
-      val markOnAlpha = LiliCore.getRepositoryContributors("OrgX", "alpha").filter(_.login == "mark").head
-      val markOnBeta = LiliCore.getRepositoryContributors("OrgX", "beta").filter(_.login == "mark").head
+      val markOnAlpha = LiliCore
+         .getRepositoryContributors("OrgX", "alpha")
+         .filter(_.login == "mark")
+         .head
+
+      val markOnBeta = LiliCore
+         .getRepositoryContributors("OrgX", "beta")
+         .filter(_.login == "mark")
+         .head
 
       val markOnBoth = LiliCore.getOrganizationContributors("OrgX").filter(_.login == "mark").head
 

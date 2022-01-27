@@ -1,24 +1,7 @@
 package lili_core
 
-class Contributor(val id: Long, val login: String, val contributions: Int):
-   override def equals(other: Any): Boolean = other match {
-      case that: Contributor => id == that.id && login == that.login
-      case _                 => false
-   }
-
-type Contributors = List[Contributor]
-
-case class Repository(id: Long, owner: String, name: String):
-   def fullName: String = owner + "/" + name
-
-type Repositories = List[Repository]
-
-trait VCSHub:
-   type Contributors = List[Contributor]
-   type Repositories = List[Repository]
-
-   def listOrganizationRepositories(organization: String): Repositories
-   def listRepositoryContributors(organization: String, repository: String): Contributors
+import lili_core.hub.VCSHub
+import lili_core.models._
 
 object LiliCore:
    def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =
