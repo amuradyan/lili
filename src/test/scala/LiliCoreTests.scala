@@ -92,7 +92,7 @@ class LiliCoreTest extends AnyFlatSpec with Matchers:
       val contributors = LiliCore.getContributorsSortedByContributions("OrgX")
 
       contributors.sliding(2).foreach {
-         case List(a, b) => a.contributions should be <= b.contributions
+         case List(a, b) => a.contributions should be >= b.contributions
          case _          => succeed
       }
    }
