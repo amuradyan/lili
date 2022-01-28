@@ -34,12 +34,12 @@ class DummyHub extends VCSHub:
 
    private val users = List(
      HubUser("steve", "Steve Robinson"),
-     HubUser("mark", "Mark Robinson"),
+     HubUser("mark", ""),
      HubUser("phil", "Phil Robinson")
    )
 
-   def getUser(login: String): Option[HubUser] =
-      users.find(_.login.toLowerCase == login.toLowerCase)
+   def getUserName(login: String): Option[Name] =
+      users.find(_.login.toLowerCase == login.toLowerCase).map(_.name)
 
    def listOrganizationRepositories(organization: String): HubRepositories =
       organizationsAndRepos.get(organization.toLowerCase) match {
