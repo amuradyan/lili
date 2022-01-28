@@ -9,21 +9,21 @@ class DummyHub extends VCSHub:
      HubContributor("mark", 2),
      HubContributor("phil", 2)
    )
-   private val alpha = HubRepository("OrgX", "alpha")
+   private val alpha = HubRepository("orgx", "alpha")
 
    private val beta_contributors = List(
      HubContributor("steve", 2),
      HubContributor("mark", 1),
      HubContributor("phil", 2)
    )
-   private val beta = HubRepository("OrgX", "beta")
+   private val beta = HubRepository("orgx", "beta")
 
-   private val gamma = HubRepository("OrgY", "gamma")
+   private val gamma = HubRepository("orgy", "gamma")
 
    private val organizationsAndRepos = Map(
-     "OrgX" -> List(alpha, beta),
-     "OrgY" -> List(gamma),
-     "OrgZ" -> Nil
+     "orgx" -> List(alpha, beta),
+     "orgy" -> List(gamma),
+     "orgz" -> Nil
    )
 
    private val reposAndContributors = Map(
@@ -38,17 +38,18 @@ class DummyHub extends VCSHub:
      HubUser("phil", "Phil Robinson")
    )
 
-   def getUser(login: String): Option[HubUser] = users.find(_.login == login)
+   def getUser(login: String): Option[HubUser] =
+      users.find(_.login.toLowerCase == login.toLowerCase)
 
    def listOrganizationRepositories(organization: String): HubRepositories =
-      organizationsAndRepos.get(organization) match {
+      organizationsAndRepos.get(organization.toLowerCase) match {
          case Some(repos) => repos
          case None        => Nil
       }
 
    def listRepositoryContributors(organization: String, repository: String): HubContributors =
       val matchedRepo = listOrganizationRepositories(organization)
-         .find(_.fullName == s"$organization/$repository")
+         .find(_.fullName.toLowerCase == s"${organization.toLowerCase}/${repository.toLowerCase}")
 
       matchedRepo match {
          case Some(repo) => reposAndContributors(repo)

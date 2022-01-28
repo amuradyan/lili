@@ -78,3 +78,17 @@ class LiliCoreTest extends AnyFlatSpec with Matchers:
          case _          => succeed
       }
    }
+
+   "Search in organizations" should "be case insensitive" in {
+      val uppercaseRepos = Lili.getOrganizationRepositories("ORGX")
+      val lowercaseRepos = Lili.getOrganizationRepositories("orgx")
+
+      uppercaseRepos shouldEqual lowercaseRepos
+   }
+
+   "Search in repositories" should "be case insensitive" in {
+      val uppercaseContributors = Lili.getRepositoryContributors("ORGX", "ALPHA")
+      val lowercaseContributors = Lili.getRepositoryContributors("orgx", "alpha")
+
+      uppercaseContributors shouldEqual lowercaseContributors
+   }

@@ -65,3 +65,26 @@ class DummyHubTest extends AnyFlatSpec with Matchers:
       contributors.isEmpty shouldEqual false
       contributors.get.login shouldEqual "steve"
    }
+
+   "Search in organizations" should "be case insensitive" in {
+      val uppercaseRepos = dummyHub.listOrganizationRepositories("ORGX")
+      val lowercaseRepos = dummyHub.listOrganizationRepositories("orgx")
+
+      uppercaseRepos shouldEqual lowercaseRepos
+   }
+
+   "Search in repositories" should "be case insensitive" in {
+      val uppercaseContributors = dummyHub.listRepositoryContributors("ORGX", "ALPHA")
+      val lowercaseContributors = dummyHub.listRepositoryContributors("orgx", "alpha")
+
+      uppercaseContributors shouldEqual lowercaseContributors
+   }
+
+   "Search for users" should "be case insensitive" in {
+      val uppercaseUser = dummyHub.getUser("STEVE")
+      val lowercaseUser = dummyHub.getUser("steve")
+
+      uppercaseUser.isEmpty shouldEqual false
+      lowercaseUser.isEmpty shouldEqual false
+      uppercaseUser shouldEqual lowercaseUser
+   }
