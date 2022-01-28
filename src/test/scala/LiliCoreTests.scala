@@ -1,11 +1,11 @@
-package lili_core.tests
+package lili.core.tests
 
 import org.scalatest._
 import flatspec._
 import matchers._
 import org.scalatest.matchers.should.Matchers
-import lili_core.LiliCore
-import lili_core.hub.VCSHub
+import lili.core.LiliCore
+import lili.core.hub.VCSHub
 
 class LiliCoreTest extends AnyFlatSpec with Matchers:
    implicit val busyOrgHub: VCSHub = new DummyHub

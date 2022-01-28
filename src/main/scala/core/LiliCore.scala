@@ -1,7 +1,7 @@
-package lili_core
+package lili.core
 
-import lili_core.hub.VCSHub
-import lili_core.models._
+import lili.core.hub.VCSHub
+import lili.core.models._
 
 object LiliCore:
    def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =

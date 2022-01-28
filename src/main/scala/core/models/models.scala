@@ -1,4 +1,4 @@
-package lili_core.models
+package lili.core.models
 
 class Contributor(val id: Long, val login: String, val contributions: Int):
    override def equals(other: Any): Boolean = other match {

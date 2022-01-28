@@ -1,7 +1,7 @@
-package lili_core.tests
+package lili.core.tests
 
-import lili_core.hub.VCSHub
-import lili_core.models._
+import lili.core.hub.VCSHub
+import lili.core.models._
 
 class DummyHub extends VCSHub:
 

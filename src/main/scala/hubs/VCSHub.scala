@@ -1,6 +1,6 @@
-package lili_core.hub
+package lili.core.hub
 
-import lili_core.models._
+import lili.core.models._
 
 trait VCSHub:
    def listOrganizationRepositories(organization: String): Repositories
