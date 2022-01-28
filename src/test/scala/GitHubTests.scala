@@ -43,5 +43,18 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       )
    }
 
-// dekanat has 4 public repos
-// haniravi has 9 public repos
+   "'haniravi/nito'" should "have 'amuradyan' as the only contributor with 46 contributions" in {
+      gitHub.listRepositoryContributors("haniravi", "nito") shouldEqual List(
+        HubContributor("amuradyan", 46)
+      )
+   }
+
+   "'dekanat/whiteboard'" should "have 'mushegh-smunch' as the only contributor with 1 contribution" in {
+      gitHub.listRepositoryContributors("dekanat", "whiteboard") shouldEqual List(
+        HubContributor("mushegh-smunch", 1)
+      )
+   }
+
+   "'haniravi/sandbox'" should "have no contributors" in {
+      gitHub.listRepositoryContributors("haniravi", "sandbox") shouldEqual Nil
+   }
