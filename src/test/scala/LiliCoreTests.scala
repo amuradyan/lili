@@ -6,47 +6,10 @@ import matchers._
 import org.scalatest.matchers.should.Matchers
 import lili.core.LiliCore
 import lili.core.hub.VCSHub
+import lili.core.hub.dummyhub.DummyHub
 
 class LiliCoreTest extends AnyFlatSpec with Matchers:
    implicit val busyOrgHub: VCSHub = new DummyHub
-
-   "Listing repos of an empty organization" should "result in an empty list" in {
-      val repos = LiliCore.getOrganizationRepositories("OrgZ")
-
-      repos should be(Nil)
-   }
-
-   "Listing repos of a non-existent organization" should "result in an empty list" in {
-      val repos = LiliCore.getOrganizationRepositories("OrgNE")
-
-      repos should be(Nil)
-   }
-
-   "Listing repos for a busy organization" should "result in a list of repos" in {
-      val repos = LiliCore.getOrganizationRepositories("OrgX")
-
-      repos should not be Nil
-      repos.length shouldEqual 2
-   }
-
-   "Listing contributors of an empty repo" should "result an empty list" in {
-      val contributors = LiliCore.getRepositoryContributors("OrgY", "gamma")
-
-      contributors should be(Nil)
-   }
-
-   "Listing contributors of a non-existent repo" should "result in an empty list" in {
-      val contributors = LiliCore.getRepositoryContributors("OrgX", "theta")
-
-      contributors should be(Nil)
-   }
-
-   "Listing contributors for a busy repo" should "result in contributors" in {
-      val contributors = LiliCore.getRepositoryContributors("OrgX", "alpha")
-
-      contributors should not be Nil
-      contributors.length shouldEqual 3
-   }
 
    "Listing contributors of an empty organization" should "result in an empty list" in {
       val contributors = LiliCore.getOrganizationContributors("OrgZ")

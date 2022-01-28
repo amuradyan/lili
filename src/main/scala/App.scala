@@ -16,7 +16,7 @@ import org.http4s.dsl.impl._
 import org.http4s.implicits._
 
 import lili.core.LiliCore
-import lili.core.tests.DummyHub
+import lili.core.hub.dummyhub.DummyHub
 
 object Lili extends IOApp:
    def contributorRoutes[F[_]: Monad]: HttpRoutes[F] = {

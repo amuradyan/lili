@@ -1,7 +1,18 @@
 package lili.core.hub
 
-import lili.core.models._
+case class HubUser(login: String, name: String)
+
+case class HubContributor(login: String, contributions: Int)
+
+type HubContributors = List[HubContributor]
+
+case class HubRepository(owner: String, name: String):
+   def fullName: String = owner + "/" + name
+
+type HubRepositories = List[HubRepository]
 
 trait VCSHub:
-   def listOrganizationRepositories(organization: String): Repositories
-   def listRepositoryContributors(organization: String, repository: String): Contributors
+
+   def getUser(login: String): Option[HubUser]
+   def listOrganizationRepositories(organization: String): HubRepositories
+   def listRepositoryContributors(organization: String, repository: String): HubContributors
