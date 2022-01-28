@@ -1,45 +1,52 @@
-package lili.core.tests
+package lili.core.hub.dummyhub
 
-import lili.core.hub.VCSHub
-import lili.core.models._
+import lili.core.hub._
 
 class DummyHub extends VCSHub:
 
-   val alpha_contributors = List(
-     Contributor(1, "steve", 1),
-     Contributor(2, "mark", 2),
-     Contributor(3, "phil", 2)
+   private val alpha_contributors = List(
+     HubContributor("steve", 1),
+     HubContributor("mark", 2),
+     HubContributor("phil", 2)
    )
-   val alpha = Repository(1, "OrgX", "alpha")
+   private val alpha = HubRepository("OrgX", "alpha")
 
-   val beta_contributors = List(
-     Contributor(1, "steve", 2),
-     Contributor(2, "mark", 1),
-     Contributor(3, "phil", 2)
+   private val beta_contributors = List(
+     HubContributor("steve", 2),
+     HubContributor("mark", 1),
+     HubContributor("phil", 2)
    )
-   val beta = Repository(2, "OrgX", "beta")
+   private val beta = HubRepository("OrgX", "beta")
 
-   val gamma = Repository(3, "OrgY", "gamma")
+   private val gamma = HubRepository("OrgY", "gamma")
 
-   val organizationsAndRepos = Map(
+   private val organizationsAndRepos = Map(
      "OrgX" -> List(alpha, beta),
      "OrgY" -> List(gamma),
      "OrgZ" -> Nil
    )
 
-   val reposAndContributors = Map(
+   private val reposAndContributors = Map(
      alpha -> alpha_contributors,
      beta -> beta_contributors,
      gamma -> Nil
    )
 
-   def listOrganizationRepositories(organization: String): Repositories =
+   private val users = List(
+     HubUser("steve", "Steve Robinson"),
+     HubUser("mark", "Mark Robinson"),
+     HubUser("phil", "Phil Robinson")
+   )
+
+   def getUser(login: String): Option[HubUser] = users.find(_.login == login)
+
+   def listOrganizationRepositories(organization: String): HubRepositories =
       organizationsAndRepos.get(organization) match {
          case Some(repos) => repos
          case None        => Nil
       }
 
-   def listRepositoryContributors(organization: String, repository: String): Contributors = {
+   def listRepositoryContributors(organization: String, repository: String): HubContributors =
       val matchedRepo = listOrganizationRepositories(organization)
          .find(_.fullName == s"$organization/$repository")
 
@@ -47,4 +54,3 @@ class DummyHub extends VCSHub:
          case Some(repo) => reposAndContributors(repo)
          case None       => Nil
       }
-   }

@@ -15,23 +15,22 @@ import org.http4s.dsl._
 import org.http4s.dsl.impl._
 import org.http4s.implicits._
 
-import lili.core.LiliCore
-import lili.core.tests.DummyHub
+import lili.core.Lili
+import lili.core.hub.dummyhub.DummyHub
 
-object Lili extends IOApp:
-   def contributorRoutes[F[_]: Monad]: HttpRoutes[F] = {
+object LiliApp extends IOApp:
+   def contributorRoutes[F[_]: Monad]: HttpRoutes[F] =
       val dsl = Http4sDsl[F]
       import dsl._
 
       HttpRoutes.of[F] {
          case GET -> Root / "org" / organizationName / "contributors" => {
-            val contributors = LiliCore
-               .getContributorsSortedByContributions(organizationName)(DummyHub())
+            val contributors =
+               Lili.getContributorsSortedByContributions(organizationName)(DummyHub())
 
             Ok(contributors.asJson)
          }
       }
-   }
 
    def lili[F[_]: Monad]: HttpApp[F] =
       contributorRoutes[F].orNotFound
