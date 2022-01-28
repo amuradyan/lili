@@ -4,19 +4,32 @@ import cats._
 import cats.effect._
 import cats.implicits._
 
+import io.circe._
+import io.circe.syntax._
+import io.circe.generic.auto._
+
 import org.http4s._
+import org.http4s.circe._
 import org.http4s.server._
 import org.http4s.dsl._
 import org.http4s.dsl.impl._
 import org.http4s.implicits._
+
+import lili.core.LiliCore
+import lili.core.tests.DummyHub
 
 object Lili extends IOApp:
    def contributorRoutes[F[_]: Monad]: HttpRoutes[F] = {
       val dsl = Http4sDsl[F]
       import dsl._
 
-      HttpRoutes.of[F] { case GET -> Root / "org" / organizationName / "contributors" =>
-         Ok(organizationName)
+      HttpRoutes.of[F] {
+         case GET -> Root / "org" / organizationName / "contributors" => {
+            val contributors = LiliCore
+               .getContributorsSortedByContributions(organizationName)(DummyHub())
+
+            Ok(contributors.asJson)
+         }
       }
    }
 
