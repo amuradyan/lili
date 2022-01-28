@@ -14,6 +14,7 @@ lazy val lili = (project in file("."))
        "org.http4s" %% "http4s-blaze-server" % http4sVersion,
        "org.http4s" %% "http4s-blaze-client" % http4sVersion,
        "io.circe" %% "circe-generic" % "0.14.1",
+       "com.47deg" %% "github4s" % "0.30.0",
        "org.scalatest" %% "scalatest" % "3.2.11" % Test
      ),
      Test / parallelExecution := false
