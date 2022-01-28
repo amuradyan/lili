@@ -3,7 +3,7 @@ package lili.core
 import lili.core.hub.VCSHub
 import lili.core.models._
 
-object LiliCore:
+object Lili:
    def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =
       hub.listOrganizationRepositories(organization).map(r => Repository(r.name, r.owner))
 
