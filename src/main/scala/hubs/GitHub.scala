@@ -22,6 +22,10 @@ class GitHub extends VCSHub:
          case Left(_)  => None
       }
 
-   def listOrganizationRepositories(organization: String): HubRepositories = ???
+   def listOrganizationRepositories(organization: String): HubRepositories =
+      gh.repos.listOrgRepos(organization).unsafeRunSync().result match {
+         case Right(repos) => repos.map(r => HubRepository(r.owner.login, r.name))
+         case Left(_)      => List.empty
+      }
 
    def listRepositoryContributors(organization: String, repository: String): HubContributors = ???
