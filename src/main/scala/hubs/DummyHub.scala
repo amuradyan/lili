@@ -1,6 +1,6 @@
-package lili.core.hub.dummyhub
+package lili.hubs.dummyhub
 
-import lili.core.hub._
+import lili.hubs._
 
 class DummyHub extends VCSHub:
 

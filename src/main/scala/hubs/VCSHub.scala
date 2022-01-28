@@ -1,4 +1,4 @@
-package lili.core.hub
+package lili.hubs
 
 case class HubUser(login: String, name: String)
 

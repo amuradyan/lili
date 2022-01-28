@@ -4,7 +4,7 @@ import org.scalatest._
 import flatspec._
 import matchers._
 import org.scalatest.matchers.should.Matchers
-import lili.core.hub.dummyhub.DummyHub
+import lili.hubs.dummyhub.DummyHub
 
 class DummyHubTest extends AnyFlatSpec with Matchers:
    val dummyHub = new DummyHub()

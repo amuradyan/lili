@@ -1,6 +1,6 @@
 package lili.core
 
-import lili.core.hub.VCSHub
+import lili.hubs.VCSHub
 import lili.core.models._
 
 object Lili:

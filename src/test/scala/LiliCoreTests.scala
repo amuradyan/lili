@@ -5,8 +5,8 @@ import flatspec._
 import matchers._
 import org.scalatest.matchers.should.Matchers
 import lili.core.Lili
-import lili.core.hub.VCSHub
-import lili.core.hub.dummyhub.DummyHub
+import lili.hubs.VCSHub
+import lili.hubs.dummyhub.DummyHub
 
 class LiliCoreTest extends AnyFlatSpec with Matchers:
    implicit val busyOrgHub: VCSHub = new DummyHub
