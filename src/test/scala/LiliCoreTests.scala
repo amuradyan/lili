@@ -11,6 +11,25 @@ import lili.core.hub.dummyhub.DummyHub
 class LiliCoreTest extends AnyFlatSpec with Matchers:
    implicit val busyOrgHub: VCSHub = new DummyHub
 
+   "Listing contributors of an empty repo" should "result an empty list" in {
+      val contributors = Lili.getRepositoryContributors("OrgY", "gamma")
+
+      contributors should be(Nil)
+   }
+
+   "Listing contributors of a non-existent repo" should "result in an empty list" in {
+      val contributors = Lili.getRepositoryContributors("OrgX", "theta")
+
+      contributors should be(Nil)
+   }
+
+   "Listing contributors for a busy repo" should "result in contributors" in {
+      val contributors = Lili.getRepositoryContributors("OrgX", "alpha")
+
+      contributors should not be Nil
+      contributors.length shouldEqual 3
+   }
+
    "Listing contributors of an empty organization" should "result in an empty list" in {
       val contributors = Lili.getOrganizationContributors("OrgZ")
 

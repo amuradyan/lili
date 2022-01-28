@@ -46,7 +46,7 @@ class DummyHub extends VCSHub:
          case None        => Nil
       }
 
-   def listRepositoryContributors(organization: String, repository: String): HubContributors = {
+   def listRepositoryContributors(organization: String, repository: String): HubContributors =
       val matchedRepo = listOrganizationRepositories(organization)
          .find(_.fullName == s"$organization/$repository")
 
@@ -54,4 +54,3 @@ class DummyHub extends VCSHub:
          case Some(repo) => reposAndContributors(repo)
          case None       => Nil
       }
-   }

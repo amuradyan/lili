@@ -19,7 +19,7 @@ import lili.core.Lili
 import lili.core.hub.dummyhub.DummyHub
 
 object LiliApp extends IOApp:
-   def contributorRoutes[F[_]: Monad]: HttpRoutes[F] = {
+   def contributorRoutes[F[_]: Monad]: HttpRoutes[F] =
       val dsl = Http4sDsl[F]
       import dsl._
 
@@ -31,7 +31,6 @@ object LiliApp extends IOApp:
             Ok(contributors.asJson)
          }
       }
-   }
 
    def lili[F[_]: Monad]: HttpApp[F] =
       contributorRoutes[F].orNotFound
