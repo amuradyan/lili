@@ -48,3 +48,9 @@ class DummyHub extends VCSHub:
          case None       => Nil
       }
    }
+
+   def getOrganizationRepositoryCount(organization: String): Int =
+      organizationsAndRepos.get(organization) match {
+         case Some(repos) => repos.length
+         case None        => 0
+      }

@@ -4,6 +4,9 @@ import lili_core.hub.VCSHub
 import lili_core.models._
 
 object LiliCore:
+   def getOrganizationRepositoryCount(organization: String)(implicit hub: VCSHub): Int =
+      hub.getOrganizationRepositoryCount(organization)
+
    def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =
       hub.listOrganizationRepositories(organization)
 

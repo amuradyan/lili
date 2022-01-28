@@ -8,3 +8,4 @@ trait VCSHub:
 
    def listOrganizationRepositories(organization: String): Repositories
    def listRepositoryContributors(organization: String, repository: String): Contributors
+   def getOrganizationRepositoryCount(organization: String): Int

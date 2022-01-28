@@ -96,3 +96,17 @@ class LiliCoreTest extends AnyFlatSpec with Matchers:
          case _          => succeed
       }
    }
+
+   "For an empty organization, the count of repos" should "be zero" in {
+      val repositoryCount = LiliCore.getOrganizationRepositoryCount("OrgZ")
+
+      repositoryCount shouldEqual 0
+   }
+
+   "For a busy organization, the count of repos" should "be greater than zero" in {
+      val xRepositoryCount = LiliCore.getOrganizationRepositoryCount("OrgX")
+      val yRepositoryCount = LiliCore.getOrganizationRepositoryCount("OrgY")
+
+      xRepositoryCount shouldEqual 2
+      yRepositoryCount shouldEqual 1
+   }
