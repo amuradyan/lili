@@ -33,9 +33,9 @@ class DummyHub extends VCSHub:
    )
 
    private val users = List(
-     HubUser("steve", "Steve"),
-     HubUser("mark", "Mark"),
-     HubUser("phil", "Phil")
+     HubUser("steve", "Steve Robinson"),
+     HubUser("mark", "Mark Robinson"),
+     HubUser("phil", "Phil Robinson")
    )
 
    def getUser(login: String): Option[HubUser] = users.find(_.login == login)

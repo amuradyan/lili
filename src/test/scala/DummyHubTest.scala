@@ -46,3 +46,22 @@ class DummyHubTest extends AnyFlatSpec with Matchers:
       contributors should not be Nil
       contributors.length shouldEqual 3
    }
+
+   "Searching for an empty login" should "not yield a result" in {
+      val contributors = dummyHub.getUser("")
+
+      contributors shouldEqual None
+   }
+
+   "Searching for a non-existent login" should "not yield a result" in {
+      val contributors = dummyHub.getUser("---")
+
+      contributors shouldEqual None
+   }
+
+   "Searching for an existing login" should "yield the corresponding user" in {
+      val contributors = dummyHub.getUser("steve")
+
+      contributors.isEmpty shouldEqual false
+      contributors.get.login shouldEqual "steve"
+   }
