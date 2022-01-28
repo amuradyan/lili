@@ -1,10 +1,6 @@
 package lili.core.models
 
-class Contributor(val id: Long, val login: String, val contributions: Int):
-   override def equals(other: Any): Boolean = other match {
-      case that: Contributor => id == that.id && login == that.login
-      case _                 => false
-   }
+case class Contributor(id: Long, login: String, contributions: Int)
 
 type Contributors = List[Contributor]
 

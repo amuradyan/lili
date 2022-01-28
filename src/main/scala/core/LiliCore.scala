@@ -23,4 +23,4 @@ object LiliCore:
          .toList
 
    def getContributorsSortedByContributions(organization: String)(implicit hub: VCSHub): Contributors =
-      getOrganizationContributors(organization).sortBy(_.contributions)
+      getOrganizationContributors(organization).sortBy(-_.contributions)
