@@ -43,6 +43,14 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       )
    }
 
+   "'basecamp'" should "have 147 repositories" in {
+      gitHub.listOrganizationRepositories("basecamp").size shouldEqual 147
+   }
+
+   "'atlassian'" should "have 376 repositories" in {
+      gitHub.listOrganizationRepositories("atlassian").size shouldEqual 376
+   }
+
    "'haniravi/nito'" should "have 'amuradyan' as the only contributor with 46 contributions" in {
       gitHub.listRepositoryContributors("haniravi", "nito") shouldEqual List(
         HubContributor("amuradyan", 46)
@@ -57,6 +65,10 @@ class GitHubTests extends AnyFlatSpec with Matchers:
 
    "'haniravi/sandbox'" should "have no contributors" in {
       gitHub.listRepositoryContributors("haniravi", "sandbox") shouldEqual Nil
+   }
+
+   "'microsoft/vscode'" should "have 364 contributors" in {
+      gitHub.listRepositoryContributors("microsoft", "vscode").size shouldEqual 364
    }
 
    "'dekanat'" should "have four public repositories" in {
