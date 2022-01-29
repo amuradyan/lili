@@ -43,6 +43,14 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       )
    }
 
+   "'basecamp'" should "have 147 repositories" in {
+      gitHub.listOrganizationRepositories("basecamp").size shouldEqual 147
+   }
+
+   "'atlassian'" should "have 376 repositories" in {
+      gitHub.listOrganizationRepositories("atlassian").size shouldEqual 376
+   }
+
    "'haniravi/nito'" should "have 'amuradyan' as the only contributor with 46 contributions" in {
       gitHub.listRepositoryContributors("haniravi", "nito") shouldEqual List(
         HubContributor("amuradyan", 46)
@@ -59,10 +67,38 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       gitHub.listRepositoryContributors("haniravi", "sandbox") shouldEqual Nil
    }
 
+   "'microsoft/vscode'" should "have 364 contributors" in {
+      gitHub.listRepositoryContributors("microsoft", "vscode").size shouldEqual 364
+   }
+
    "'dekanat'" should "have four public repositories" in {
       gitHub.getOrganizationRepositoryCount("dekanat") shouldEqual 4
    }
 
    "'haniravi'" should "have nine public repositories" in {
       gitHub.getOrganizationRepositoryCount("haniravi") shouldEqual 9
+   }
+
+   "Second page of contributors of 'haniravi/nito'" should "be empty" in {
+      val contributorsOnPage2 = gitHub.repositoryContributorListAtPage("haniravi", "nito", 2)
+
+      contributorsOnPage2 shouldEqual Nil
+   }
+
+   "Second page of contributors of 'microsoft/typescript'" should " not be empty" in {
+      val contributorsOnPage2 = gitHub.repositoryContributorListAtPage("microsoft", "typescript", 2)
+
+      contributorsOnPage2 should not be (Nil)
+   }
+
+   "Second page of repos of 'haniravi'" should "be empty" in {
+      val reposOnPage2 = gitHub.organizationRepositoryListAtPage("haniravi", 2)
+
+      reposOnPage2 shouldEqual Nil
+   }
+
+   "Second page of repos of 'microsoft'" should "not be empty" in {
+      val reposOnPage2 = gitHub.organizationRepositoryListAtPage("microsoft", 2)
+
+      reposOnPage2 should not be (Nil)
    }

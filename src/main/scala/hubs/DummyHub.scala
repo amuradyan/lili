@@ -44,16 +44,14 @@ class DummyHub extends VCSHub:
       users.find(_.login.toLowerCase == login.toLowerCase).map(_.name)
 
    def listOrganizationRepositories(organization: String): HubRepositories =
-      organizationsAndRepos.get(organization.toLowerCase) match {
+      organizationsAndRepos.get(organization.toLowerCase) match
          case Some(repos) => repos
          case None        => Nil
-      }
 
    def listRepositoryContributors(organization: String, repository: String): HubContributors =
       val matchedRepo = listOrganizationRepositories(organization)
          .find(_.fullName.toLowerCase == s"${organization.toLowerCase}/${repository.toLowerCase}")
 
-      matchedRepo match {
+      matchedRepo match
          case Some(repo) => reposAndContributors(repo)
          case None       => Nil
-      }
