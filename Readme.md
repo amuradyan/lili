@@ -13,7 +13,7 @@ _Lili_ serves the information over HTTP at port `8080` at endpoint `/org/<organi
 If you host it locally, it should be to reach it like so:
 
 ```bash
-curl http://localhost:8080/org/<_organization name_>/contributors
+curl http://localhost:8080/org/<organization name>/contributors
 ```
 
 ## Build, test, run
@@ -42,12 +42,12 @@ To create a deployable jar, you should run the following command:
 sbt assembly
 ```
 
-After that, you'll find the jar at `./target/scala-3.1.0/Lili-assembly-0.1.0-SNAPSHOT.jar` from the project root.
+After that, you'll find the jar at `./target/scala-3.1.0/lili-assembly-x.y.z.jar` from the project root.
 
 To run it, do the following:
 
 ```bash
-java -jar Lili-assembly-0.1.0-SNAPSHOT.jar
+java -jar lili-assembly-x.y.z.jar
 ```
 
 This will start _Lili_ on `localhost:8080`.
@@ -58,7 +58,7 @@ You can pass your token to _Lili_ via an environment variable `GH_TOKEN` either 
 
 
 ```bash
-export GH_TOKEN=<_your token_>; java -jar Lili-assembly-0.1.0-SNAPSHOT.jar
+export GH_TOKEN=<your token>; java -jar lili-assembly-x.y.z.jar
 ```
 
 **NOTE:** You can find out more about tokens and rates at [GitHub Rate Limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting).
