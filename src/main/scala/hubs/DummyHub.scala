@@ -1,8 +1,8 @@
-package lili.hubs.dummyhub
+package lili.hubs.stubhub
 
 import lili.hubs._
 
-class DummyHub extends VCSHub:
+class StubHub extends VCSHub:
 
    private val alpha_contributors = List(
      HubContributor("steve", 1),

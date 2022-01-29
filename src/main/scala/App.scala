@@ -16,7 +16,7 @@ import org.http4s.dsl.impl._
 import org.http4s.implicits._
 
 import lili.core.Lili
-import lili.hubs.dummyhub.DummyHub
+import lili.hubs.stubhub.StubHub
 
 object LiliApp extends IOApp:
    def contributorRoutes[F[_]: Monad]: HttpRoutes[F] =
@@ -26,7 +26,7 @@ object LiliApp extends IOApp:
       HttpRoutes.of[F] {
          case GET -> Root / "org" / organizationName / "contributors" => {
             val contributors =
-               Lili.getContributorsSortedByContributions(organizationName)(DummyHub())
+               Lili.getContributorsSortedByContributions(organizationName)(StubHub())
 
             Ok(contributors.asJson)
          }
