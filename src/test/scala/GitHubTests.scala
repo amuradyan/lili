@@ -58,3 +58,11 @@ class GitHubTests extends AnyFlatSpec with Matchers:
    "'haniravi/sandbox'" should "have no contributors" in {
       gitHub.listRepositoryContributors("haniravi", "sandbox") shouldEqual Nil
    }
+
+   "'dekanat'" should "have four public repositories" in {
+      gitHub.getOrganizationRepositoryCount("dekanat") shouldEqual 4
+   }
+
+   "'haniravi'" should "have nine public repositories" in {
+      gitHub.getOrganizationRepositoryCount("haniravi") shouldEqual 9
+   }
