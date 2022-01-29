@@ -87,3 +87,21 @@ class DummyHubTest extends AnyFlatSpec with Matchers:
       lowercaseUser.isEmpty shouldEqual false
       uppercaseUser shouldEqual lowercaseUser
    }
+
+   "OrgX" should "have 2 repos" in {
+      val repos = dummyHub.listOrganizationRepositories("OrgX")
+
+      repos.length shouldEqual 2
+   }
+
+   "OrgY" should "have 1 repo" in {
+      val repos = dummyHub.listOrganizationRepositories("OrgY")
+
+      repos.length shouldEqual 1
+   }
+
+   "OrgZ" should "have 0 repos" in {
+      val repos = dummyHub.listOrganizationRepositories("OrgZ")
+
+      repos.length shouldEqual 0
+   }

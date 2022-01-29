@@ -38,6 +38,8 @@ class DummyHub extends VCSHub:
      HubUser("phil", "Phil Robinson")
    )
 
+   def getOrganizationRepositoryCount(organization: String): RepoCount = ???
+
    def getUserName(login: String): Option[Name] =
       users.find(_.login.toLowerCase == login.toLowerCase).map(_.name)
 
