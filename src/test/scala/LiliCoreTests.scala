@@ -57,15 +57,15 @@ class LiliCoreTest extends AnyFlatSpec with Matchers:
    "Organization contributor list" should "sum up each contributors contributions" in {
       val markOnAlpha = Lili
          .getRepositoryContributors("OrgX", "alpha")
-         .filter(_.login == "mark")
+         .filter(_.name == "mark")
          .head
 
       val markOnBeta = Lili
          .getRepositoryContributors("OrgX", "beta")
-         .filter(_.login == "mark")
+         .filter(_.name == "mark")
          .head
 
-      val markOnBoth = Lili.getOrganizationContributors("OrgX").filter(_.login == "mark").head
+      val markOnBoth = Lili.getOrganizationContributors("OrgX").filter(_.name == "mark").head
 
       markOnBoth.contributions shouldEqual (markOnAlpha.contributions + markOnBeta.contributions)
    }

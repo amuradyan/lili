@@ -18,11 +18,6 @@ class GitHub extends VCSHub:
 
    val gh = GH[IO](httpClient, accessToken)
 
-   def getUserName(login: String): Option[Name] =
-      gh.users.get(login).unsafeRunSync().result match
-         case Right(u) => u.name
-         case Left(_)  => None
-
    def organizationRepositoryListAtPage(organization: String, page: Int): HubRepositories =
       val paginationOption = Some(Pagination(page, 100))
 

@@ -47,24 +47,6 @@ class StubHubTest extends AnyFlatSpec with Matchers:
       contributors.length shouldEqual 3
    }
 
-   "Searching for an empty login" should "not yield a result" in {
-      val contributors = stubHub.getUserName("")
-
-      contributors shouldEqual None
-   }
-
-   "Searching for a non-existent login" should "not yield a result" in {
-      val contributors = stubHub.getUserName("---")
-
-      contributors shouldEqual None
-   }
-
-   "Searching for an existing login" should "yield the corresponding user" in {
-      stubHub.getUserName("steve").map { name =>
-         name shouldEqual "Steve Robinson"
-      }
-   }
-
    "Search in organizations" should "be case insensitive" in {
       val uppercaseRepos = stubHub.listOrganizationRepositories("ORGX")
       val lowercaseRepos = stubHub.listOrganizationRepositories("orgx")
@@ -77,15 +59,6 @@ class StubHubTest extends AnyFlatSpec with Matchers:
       val lowercaseContributors = stubHub.listRepositoryContributors("orgx", "alpha")
 
       uppercaseContributors shouldEqual lowercaseContributors
-   }
-
-   "Search for users" should "be case insensitive" in {
-      val uppercaseUser = stubHub.getUserName("STEVE")
-      val lowercaseUser = stubHub.getUserName("steve")
-
-      uppercaseUser.isEmpty shouldEqual false
-      lowercaseUser.isEmpty shouldEqual false
-      uppercaseUser shouldEqual lowercaseUser
    }
 
    "OrgX" should "have 2 repos" in {
