@@ -1,10 +1,10 @@
-package lili.core.hub.test
+package lili.hubs.tests
 
 import org.scalatest._
 import flatspec._
 import matchers._
 import org.scalatest.matchers.should.Matchers
-import lili.core.hub.dummyhub.DummyHub
+import lili.hubs.dummyhub.DummyHub
 
 class DummyHubTest extends AnyFlatSpec with Matchers:
    val dummyHub = new DummyHub()
@@ -48,22 +48,21 @@ class DummyHubTest extends AnyFlatSpec with Matchers:
    }
 
    "Searching for an empty login" should "not yield a result" in {
-      val contributors = dummyHub.getUser("")
+      val contributors = dummyHub.getUserName("")
 
       contributors shouldEqual None
    }
 
    "Searching for a non-existent login" should "not yield a result" in {
-      val contributors = dummyHub.getUser("---")
+      val contributors = dummyHub.getUserName("---")
 
       contributors shouldEqual None
    }
 
    "Searching for an existing login" should "yield the corresponding user" in {
-      val contributors = dummyHub.getUser("steve")
-
-      contributors.isEmpty shouldEqual false
-      contributors.get.login shouldEqual "steve"
+      dummyHub.getUserName("steve").map { name =>
+         name shouldEqual "Steve Robinson"
+      }
    }
 
    "Search in organizations" should "be case insensitive" in {
@@ -81,8 +80,8 @@ class DummyHubTest extends AnyFlatSpec with Matchers:
    }
 
    "Search for users" should "be case insensitive" in {
-      val uppercaseUser = dummyHub.getUser("STEVE")
-      val lowercaseUser = dummyHub.getUser("steve")
+      val uppercaseUser = dummyHub.getUserName("STEVE")
+      val lowercaseUser = dummyHub.getUserName("steve")
 
       uppercaseUser.isEmpty shouldEqual false
       lowercaseUser.isEmpty shouldEqual false

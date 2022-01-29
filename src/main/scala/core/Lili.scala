@@ -1,6 +1,6 @@
 package lili.core
 
-import lili.core.hub.VCSHub
+import lili.hubs.VCSHub
 import lili.core.models._
 
 object Lili:
@@ -9,7 +9,7 @@ object Lili:
 
    def getRepositoryContributors(organization: String, repository: String)(implicit hub: VCSHub): Contributors =
       hub.listRepositoryContributors(organization, repository)
-         .map(c => hub.getUser(c.login).map(u => Contributor(c.login, u.name, c.contributions)).get)
+         .map(c => hub.getUserName(c.login).map(u => Contributor(c.login, u, c.contributions)).get)
 
    def getOrganizationContributors(organization: String)(implicit hub: VCSHub): Contributors =
       val contributorsGroupedByLoginName =

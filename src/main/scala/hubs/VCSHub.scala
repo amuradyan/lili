@@ -1,4 +1,4 @@
-package lili.core.hub
+package lili.hubs
 
 case class HubUser(login: String, name: String)
 
@@ -11,8 +11,10 @@ case class HubRepository(owner: String, name: String):
 
 type HubRepositories = List[HubRepository]
 
+type Name = String
+
 trait VCSHub:
 
-   def getUser(login: String): Option[HubUser]
+   def getUserName(login: String): Option[Name]
    def listOrganizationRepositories(organization: String): HubRepositories
    def listRepositoryContributors(organization: String, repository: String): HubContributors
