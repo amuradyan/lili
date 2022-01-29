@@ -6,10 +6,10 @@ import matchers._
 import org.scalatest.matchers.should.Matchers
 import lili.core.Lili
 import lili.hubs.VCSHub
-import lili.hubs.dummyhub.DummyHub
+import lili.hubs.stubhub.StubHub
 
 class LiliCoreTest extends AnyFlatSpec with Matchers:
-   implicit val busyOrgHub: VCSHub = new DummyHub
+   implicit val busyOrgHub: VCSHub = new StubHub
 
    "Listing contributors of an empty repo" should "result an empty list" in {
       val contributors = Lili.getRepositoryContributors("OrgY", "gamma")
