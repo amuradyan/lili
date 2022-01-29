@@ -66,3 +66,27 @@ class GitHubTests extends AnyFlatSpec with Matchers:
    "'haniravi'" should "have nine public repositories" in {
       gitHub.getOrganizationRepositoryCount("haniravi") shouldEqual 9
    }
+
+   "Second page of contributors of 'haniravi/nito'" should "be empty" in {
+      val contributorsOnPage2 = gitHub.repositoryContributorListAtPage("haniravi", "nito", 2)
+
+      contributorsOnPage2 shouldEqual Nil
+   }
+
+   "Second page of contributors of 'microsoft/typescript'" should " not be empty" in {
+      val contributorsOnPage2 = gitHub.repositoryContributorListAtPage("microsoft", "typescript", 2)
+
+      contributorsOnPage2 should not be (Nil)
+   }
+
+   "Second page of repos of 'haniravi'" should "be empty" in {
+      val reposOnPage2 = gitHub.organizationRepositoryListAtPage("haniravi", 2)
+
+      reposOnPage2 shouldEqual Nil
+   }
+
+   "Second page of repos of 'microsoft'" should "not be empty" in {
+      val reposOnPage2 = gitHub.organizationRepositoryListAtPage("microsoft", 2)
+
+      reposOnPage2 should not be (Nil)
+   }
