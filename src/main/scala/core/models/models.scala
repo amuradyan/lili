@@ -1,6 +1,6 @@
 package lili.core.models
 
-case class Contributor(login: String, name: String, contributions: Int)
+case class Contributor(name: String, contributions: Int)
 
 type Contributors = List[Contributor]
 

@@ -12,14 +12,6 @@ import lili.hubs.github.GitHub
 class GitHubTests extends AnyFlatSpec with Matchers:
    val gitHub = new GitHub()
 
-   "'amuradyan'-s name on GitHub" should "be missing" in {
-      gitHub.getUserName("amuradyan") shouldEqual None
-   }
-
-   "'jdegoes'-s name on GitHub" should "be John A. De Goes" in {
-      gitHub.getUserName("jdegoes") shouldEqual Some("John A. De Goes")
-   }
-
    "'dekanat'" should "have the following four repositories" in {
       gitHub.listOrganizationRepositories("dekanat") shouldEqual List(
         HubRepository("dekanat", "darling"),
