@@ -8,8 +8,14 @@ object Lili:
       hub.listOrganizationRepositories(organization).map(r => Repository(r.owner, r.name))
 
    def getRepositoryContributors(organization: String, repository: String)(implicit hub: VCSHub): Contributors =
-      hub.listRepositoryContributors(organization, repository)
-         .map(c => hub.getUserName(c.login).map(u => Contributor(c.login, u, c.contributions)).get)
+      hub
+         .listRepositoryContributors(organization, repository)
+         .map { c =>
+            hub.getUserName(c.login) match {
+               case Some(name) => Contributor(c.login, name, c.contributions)
+               case None       => Contributor(c.login, "", c.contributions)
+            }
+         }
 
    def getOrganizationContributors(organization: String)(implicit hub: VCSHub): Contributors =
       val contributorsGroupedByLoginName =
