@@ -13,7 +13,8 @@ class GitHub extends VCSHub:
 
    val httpClient: Client[IO] = JavaNetClientBuilder[IO].create
 
-   val accessToken = sys.env.get("GITHUB_TOKEN")
+   val accessToken = sys.env.get("GH_TOKEN")
+
    val gh = GH[IO](httpClient, accessToken)
 
    def getOrganizationRepositoryCount(organization: String): RepoCount =

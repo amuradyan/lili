@@ -1,5 +1,8 @@
 .metals/
 .bsp/
 .bloop/
-project/
+project/*
+!project/plugins.sbt
 target/
+
+.env
