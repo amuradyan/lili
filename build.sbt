@@ -1,11 +1,12 @@
 ThisBuild / scalaVersion := "3.1.0"
 ThisBuild / organization := "liliville"
+ThisBuild / version := "0.2.0"
 
 val http4sVersion = "0.23.8"
 
 lazy val lili = (project in file("."))
    .settings(
-     name := "Lili",
+     name := "lili",
      libraryDependencies ++= Seq(
        "org.typelevel" %% "cats-effect" % "3.3.4",
        "org.http4s" %% "http4s-dsl" % http4sVersion,
