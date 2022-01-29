@@ -18,9 +18,6 @@ class GitHub extends VCSHub:
 
    val gh = GH[IO](httpClient, accessToken)
 
-   def getOrganizationRepositoryCount(organization: String): RepoCount =
-      listOrganizationRepositories(organization).length
-
    def getUserName(login: String): Option[Name] =
       gh.users.get(login).unsafeRunSync().result match
          case Right(u) => u.name

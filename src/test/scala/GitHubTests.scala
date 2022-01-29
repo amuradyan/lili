@@ -71,14 +71,6 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       gitHub.listRepositoryContributors("microsoft", "vscode").size shouldEqual 364
    }
 
-   "'dekanat'" should "have four public repositories" in {
-      gitHub.getOrganizationRepositoryCount("dekanat") shouldEqual 4
-   }
-
-   "'haniravi'" should "have nine public repositories" in {
-      gitHub.getOrganizationRepositoryCount("haniravi") shouldEqual 9
-   }
-
    "Second page of contributors of 'haniravi/nito'" should "be empty" in {
       val contributorsOnPage2 = gitHub.repositoryContributorListAtPage("haniravi", "nito", 2)
 
