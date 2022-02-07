@@ -26,6 +26,7 @@ class GitHub extends VCSHub:
          case Left(_)      => List.empty
 
    def listOrganizationRepositories(organization: String): HubRepositories =
+
       def getAllRepositoryResultPages(page: Int, repositories: HubRepositories): HubRepositories =
          organizationRepositoryListAtPage(organization, page) match
             case Nil   => repositories
@@ -41,6 +42,7 @@ class GitHub extends VCSHub:
          case Left(_)             => List.empty
 
    def listRepositoryContributors(organization: String, repository: String): HubContributors =
+
       def getAllRepositoryContributorResultPages(page: Int, contributors: HubContributors): HubContributors =
          repositoryContributorListAtPage(organization, repository, page) match
             case Nil   => contributors
