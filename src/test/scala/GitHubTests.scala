@@ -35,8 +35,8 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       )
    }
 
-   "'basecamp'" should "have 147 repositories" in {
-      gitHub.listOrganizationRepositories("basecamp").size shouldEqual 147
+   "'basecamp'" should "have 149 repositories" in {
+      gitHub.listOrganizationRepositories("basecamp").size shouldEqual 149
    }
 
    "'atlassian'" should "have 376 repositories" in {
@@ -59,8 +59,8 @@ class GitHubTests extends AnyFlatSpec with Matchers:
       gitHub.listRepositoryContributors("haniravi", "sandbox") shouldEqual Nil
    }
 
-   "'microsoft/vscode'" should "have 364 contributors" in {
-      gitHub.listRepositoryContributors("microsoft", "vscode").size shouldEqual 364
+   "'microsoft/vscode'" should "have 363 contributors" in {
+      gitHub.listRepositoryContributors("microsoft", "vscode").size shouldEqual 363
    }
 
    "Second page of contributors of 'haniravi/nito'" should "be empty" in {
