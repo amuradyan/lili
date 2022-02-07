@@ -3,16 +3,16 @@ package lili.core
 import lili.hubs.VCSHub
 import lili.core.models._
 
-object Lili:
-   def getOrganizationRepositories(organization: String)(implicit hub: VCSHub): Repositories =
+class Lili(hub: VCSHub):
+   def getOrganizationRepositories(organization: String): Repositories =
       hub.listOrganizationRepositories(organization).map(r => Repository(r.owner, r.name))
 
-   def getRepositoryContributors(organization: String, repository: String)(implicit hub: VCSHub): Contributors =
+   def getRepositoryContributors(organization: String, repository: String): Contributors =
       hub
          .listRepositoryContributors(organization, repository)
          .map { c => Contributor(c.login, c.contributions) }
 
-   def getOrganizationContributors(organization: String)(implicit hub: VCSHub): Contributors =
+   def getOrganizationContributors(organization: String): Contributors =
       val contributorsGroupedByLoginName =
          getOrganizationRepositories(organization)
             .flatMap { r =>
@@ -29,5 +29,5 @@ object Lili:
 
       contributorsSortedByContribution
 
-   def getContributorsSortedByContributions(organization: String)(implicit hub: VCSHub): Contributors =
+   def getContributorsSortedByContributions(organization: String): Contributors =
       getOrganizationContributors(organization).sortBy(-_.contributions)
